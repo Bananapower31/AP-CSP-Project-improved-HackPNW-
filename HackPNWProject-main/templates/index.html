@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Trip to Fun!</title>
+
+<style>
+    html, body {
+      font: Times;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #42cef5, #3173f7);
+      background-repeat: no-repeat; /* Ensure gradient doesn't repeat */
+    }
+        /**/
+      </style>
+<title>
+    Road Trip To Fun!
+</title>
+<style>
+    .button{
+            margin: 10px;
+            padding: 20px 50px;
+            background-color: #da589f;
+            color: black;
+            border: none;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-top: 50px;
+            
+    }
+</style>
+</head>
+<body>
+  <div>
+    <p style="background-color: #1ebd4e; color: rgb(0, 50, 0); padding: 10px 10px; width: 200px; height: 10px; text-align: center; border-radius: 30px;"> 
+
+      Correct: {{ session.correct }} Total: {{ session.total }}
+    </p>
+  <form action="javascript:void(0);">
+    <h1
+      style="background-color: #3173f7; color: #42cef5;text-align: center;">ROAD TRIP TO FUN!</h1>
+        {% for question, data in questions %}
+            <p style="background-color: #1ebd4e; color: darkgreen; text-align: center;">{{ question }}</p>
+            <table><tr>
+            {% for option in data.options %}
+              <td><button onclick="setColor(this, '{{option}}', '{{data.answer}}'); disableOthers(this)" class="button" name="question" value = "{{option}}"> {{option}} </button></td>
+            {% endfor %}
+            </tr></table>
+        {% endfor %}
+        <table><tr>
+          <td><button id="next" class="button" onclick="nextQuestion()" name="next" value="next">Next Question</button></td>
+        </tr>
+        </table>
+  </form>
+    <script>
+
+
+      function setColor(_this, selected, answer) {
+          if (selected === answer) {
+              _this.style.backgroundColor = "green";
+              window.location.href("/index/correct");
+          } else {
+              _this.style.backgroundColor = "red";
+          }
+      }
+
+
+      function nextQuestion(){
+        location.reload();
+        window.location.href("/index")
+      }
+
+    function disableOthers(clickedButton) {
+      // Get all buttons on the page
+      var buttons = document.getElementsByTagName("button");
+
+      // Loop through each button
+      for (var i = 0; i < buttons.length; i++) {
+        // Disable all buttons except the one that was clicked
+        if (buttons[i] !== clickedButton && buttons[i].name !== "next") {
+          buttons[i].disabled = true;
+        }
+      }
+    }
+    var button = document.getElementById("next");
+    button.disabled = false;
+    </script>
+</body>
+</html>
