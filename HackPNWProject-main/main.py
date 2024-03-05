@@ -2220,7 +2220,7 @@ def index():
     total = session['total']
     session['total'] += 1
     correct = session['correct']
-    return (render_template('index.html', questions=rand_questions), total, correct)
+    return (render_template('index.html', questions=rand_questions), total-1, correct)
 
 @app.route('/')
 def home():
