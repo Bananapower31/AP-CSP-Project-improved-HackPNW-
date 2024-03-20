@@ -17,7 +17,7 @@
       background: linear-gradient(to bottom, #42cef5, #3173f7);
       background-repeat: no-repeat; /* Ensure gradient doesn't repeat */
     }
-        /**/
+        
       </style>
 <title>
     Road Trip To Fun!
@@ -39,7 +39,6 @@
 <body>
   <div>
     <p style="background-color: #1ebd4e; color: rgb(0, 50, 0); padding: 10px 10px; width: 200px; height: 10px; text-align: center; border-radius: 30px;"> 
-
       Correct: {{ session.correct }} Total: {{ session.total }}
     </p>
   <form action="javascript:void(0);">
@@ -64,7 +63,7 @@
       function setColor(_this, selected, answer) {
           if (selected === answer) {
               _this.style.backgroundColor = "green";
-              window.location.href("/index/correct");
+              correct();
           } else {
               _this.style.backgroundColor = "red";
           }
