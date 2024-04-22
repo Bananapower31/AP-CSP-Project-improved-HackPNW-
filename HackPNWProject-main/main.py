@@ -5,8 +5,8 @@ from flask import Flask, render_template, request, session, jsonify
 app = Flask(__name__)
 app.secret_key = 'tfrg29fdrd'
 
-ip = requests.get('https://api.ipify.org').text
-api_key = "at_bDLLVFBLo6YXK16JZYIqN9sIIqrsL"
+ip = requests.get('https://geo.ipify.org').text
+api_key = "at_TGFZTCVqhr6MAWoXTYTMcfJ99Md8c"
 
 def geolocator(ip):
     try:
