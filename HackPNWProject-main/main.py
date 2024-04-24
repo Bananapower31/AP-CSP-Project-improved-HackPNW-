@@ -8,6 +8,7 @@ app.secret_key = 'tfrg29fdrd'
 ip = requests.get('https://geo.ipify.org').text
 api_key = "at_TGFZTCVqhr6MAWoXTYTMcfJ99Md8c"
 
+#gets the region/state where you are
 def geolocator(ip):
     try:
         response = requests.get(f"https://geo.ipify.org/api/v2/country,city?apiKey={api_key}&ipAddress={ip}")
@@ -22,6 +23,11 @@ def geolocator(ip):
         print("An error occurred:", e)
         return None
 
+#list of all questions
+#ex. "What is the state bird of Washington?": {
+#    "options": ["A) American Goldfinch", "B) Willow Goldfinch", "C) Northern Mockingbird", "D) American Robin"],
+#    "answer": "B) Willow Goldfinch"
+#    },
 
 def states():
     all_states = {}
@@ -2210,6 +2216,14 @@ def states():
 
 user_location = geolocator(ip)
 
+#creates homescreen, resets everything at the start
+@app.route('/')
+def home():
+    session['total'] = 0
+    session['correct'] = 0
+    return render_template("homescreen.html")
+
+#goes to the questions screen, gives the questions and number of questions
 @app.route('/index')
 def index():
     ip = requests.get('https://api.ipify.org').text
@@ -2223,12 +2237,6 @@ def index():
     def correct():
         session['correct'] += 1
     return (render_template('index.html', questions=rand_questions), total-1, correct)
-
-@app.route('/')
-def home():
-    session['total'] = 0
-    session['correct'] = 0
-    return render_template("homescreen.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
